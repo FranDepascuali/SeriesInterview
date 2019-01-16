@@ -24,8 +24,8 @@ end
 abstract_target 'App' do
   app_pods
 
-  target 'SampleContactList' do
-      target 'SampleContactListTests' do
+  target 'Series' do
+      target 'SeriesTests' do
       inherit! :search_paths
       # Pods for testing
       testing_pods
@@ -33,8 +33,8 @@ abstract_target 'App' do
     end
   end
 
-  # This is used for the playground
-  target 'ContactListFramework' do
+  # # This is used for the playground
+  # target 'SeriesFramework' do
 
-  end
+  # end
 end

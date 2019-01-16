@@ -1,0 +1,52 @@
+PODS:
+  - Alamofire (4.7.3)
+  - Nimble (7.3.1)
+  - PureLayout (3.1.4)
+  - Quick (1.3.2)
+  - ReactiveCocoa (8.0.2):
+    - ReactiveSwift (~> 4.0)
+  - ReactiveSwift (4.0.0):
+    - Result (~> 4.0)
+  - Result (4.1.0)
+  - SDWebImage (4.4.3):
+    - SDWebImage/Core (= 4.4.3)
+  - SDWebImage/Core (4.4.3)
+  - SwiftyJSON (4.2.0)
+
+DEPENDENCIES:
+  - Alamofire (= 4.7.3)
+  - Nimble (= 7.3.1)
+  - PureLayout (= 3.1.4)
+  - Quick (= 1.3.2)
+  - ReactiveCocoa (= 8.0.2)
+  - ReactiveSwift (= 4.0.0)
+  - Result (= 4.1.0)
+  - SDWebImage (= 4.4.3)
+  - SwiftyJSON (~> 4.0)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - Nimble
+    - PureLayout
+    - Quick
+    - ReactiveCocoa
+    - ReactiveSwift
+    - Result
+    - SDWebImage
+    - SwiftyJSON
+
+SPEC CHECKSUMS:
+  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
+  Nimble: 04f732da099ea4d153122aec8c2a88fd0c7219ae
+  PureLayout: f08c01b8dec00bb14a1fefa3de4c7d9c265df85e
+  Quick: 2623cb30d7a7f41ca62f684f679586558f483d46
+  ReactiveCocoa: fbd26e9ba60e98417ee47433e59465a98ed9da0f
+  ReactiveSwift: a2bb9ace428a109e9c0209615645d9d286c8c433
+  Result: bd966fac789cc6c1563440b348ab2598cc24d5c7
+  SDWebImage: c5594f1a19c48d526d321e548902b56b479cd508
+  SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
+
+PODFILE CHECKSUM: 90b058300e83ac9f6e0e8487e67a2d4533af1780
+
+COCOAPODS: 1.5.3
