@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let mainViewController = ViewController()
 //        let nav = UINavigationController(rootViewController: mainViewController)
 //        window!.rootViewController = nav
-        window!.rootViewController = mainViewController
+        window!.rootViewController = ListedShowsViewController(viewModel: ListedShowsViewModel())
         window!.makeKeyAndVisible()
         return true
     }
