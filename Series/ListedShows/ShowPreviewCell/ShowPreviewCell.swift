@@ -28,9 +28,13 @@ final class ShowPreviewCell: UICollectionViewCell {
     }
 
     func fake() {
-        genreLabel.text = "ADVENTURE"
-        titleLabel.text = "Supergirl"
         backgroundImageView.image = UIImage(named: "fake-show-image")
+    }
+
+    func bindViewModel(viewModel: ShowPreviewCellViewModel) {
+        genreLabel.text = viewModel.genre
+        titleLabel.text = viewModel.title
+//        thumb.sd_setImage(with: URL(string: viewModel.thumbURL), placeholderImage: UIImage(named: "placeholder"))
     }
 
 }

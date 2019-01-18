@@ -35,10 +35,11 @@ final class ListedShowsViewController: UIViewController {
         _view.allShows.dataSource = self
         _view.allShows.delegate = self
         _view.allShows.register(ShowPreviewCell.self, forCellWithReuseIdentifier: "ShowPreviewCell")
-        _view.allShows.reloadData()
+        navigationController?.navigationBar.isHidden = true
     }
 }
 
+//TODO: white scrolling indicator 
 extension ListedShowsViewController: UICollectionViewDataSource, UICollectionViewDelegate {
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -46,11 +47,32 @@ extension ListedShowsViewController: UICollectionViewDataSource, UICollectionVie
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 8
+        return _viewModel.numberOfShows()
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let showPreviewCell = _view.allShows.dequeueReusableCell(withReuseIdentifier: "ShowPreviewCell", for: indexPath) as! ShowPreviewCell
+
+        let showPreviewCellViewModel = _viewModel.createShowPreviewCellViewModel(forIndex: indexPath.row)
+
+        showPreviewCell.bindViewModel(viewModel: showPreviewCellViewModel)
         return showPreviewCell
     }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        navigationController?.pushViewController(ShowDetailsViewController(viewModel: ShowDetailsViewModel()), animated: true)
+    }
+}
+
+fileprivate extension ListedShowsViewController {
+
+    fileprivate func bindViewModel() {
+        _viewModel
+            .fetchShows
+            .startWithValues { [unowned self] _ in
+                self._view.allShows.reloadData()
+        }
+
+    }
+
 }
