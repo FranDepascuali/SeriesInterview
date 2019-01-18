@@ -60,7 +60,7 @@ extension ListedShowsViewController: UICollectionViewDataSource, UICollectionVie
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        navigationController?.pushViewController(ShowDetailsViewController(viewModel: ShowDetailsViewModel()), animated: true)
+        navigationController?.pushViewController(ShowDetailsViewController(viewModel: _viewModel.createShowDetailsViewModel(forIndex: indexPath.row)), animated: true)
     }
 }
 

@@ -30,4 +30,8 @@ class ListedShowsViewModel {
     func createShowPreviewCellViewModel(forIndex index: Int) -> ShowPreviewCellViewModel {
         return ShowPreviewCellViewModel(show: _shows.value[index])
     }
+
+    func createShowDetailsViewModel(forIndex index: Int) -> ShowDetailsViewModel {
+        return ShowDetailsViewModel(show: _shows.value[index])
+    }
 }

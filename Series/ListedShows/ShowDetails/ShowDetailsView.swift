@@ -10,6 +10,8 @@ import UIKit
 
 class ShowDetailsView: UIView {
 
+    let backButton: UIButton = createBackButton()
+
     let showImageView: UIImageView = createShowImageView()
 
     let titleLabel: UILabel = createTitleLabel()
@@ -38,15 +40,16 @@ fileprivate extension ShowDetailsView {
 
     fileprivate func fake() {
         showImageView.image = UIImage(named: "sample")
-        titleLabel.text = "Breaking Bad"
-        yearLabel.text = "2011"
-        overviewTextView.text = "Breaking Bad is an American neo-western crime drama television series created and produced by Vince Gilligan. The show originally aired on AMC for five seasons, from January 20, 2008 to September 29, 2013. Set and filmed in Albuquerque, New Mexico, the series tells the story of Walter White (Bryan Cranston), a struggling and depressed high school chemistry teacher who is diagnosed with lung cancer. Together with his former student Jesse Pinkman (Aaron Paul), White turns to a life of crime by producing and selling crystallized methamphetamine to secure his family's financial future before he dies, while navigating the dangers of the criminal world. "
+//        titleLabel.text = "Breaking Bad"
+//        yearLabel.text = "2011"
+//        overviewTextView.text = "Breaking Bad is an American neo-western crime drama television series created and produced by Vince Gilligan. The show originally aired on AMC for five seasons, from January 20, 2008 to September 29, 2013. Set and filmed in Albuquerque, New Mexico, the series tells the story of Walter White (Bryan Cranston), a struggling and depressed high school chemistry teacher who is diagnosed with lung cancer. Together with his former student Jesse Pinkman (Aaron Paul), White turns to a life of crime by producing and selling crystallized methamphetamine to secure his family's financial future before he dies, while navigating the dangers of the criminal world. "
 
         //        backgroundColor = UIColor(red: 225, green: 184, blue: 85, alpha: 0)
         backgroundColor = .red
     }
 
     fileprivate func addSubviews() {
+        addSubview(backButton)
         addSubview(titleLabel)
         addSubview(showImageView)
         addSubview(yearLabel)
@@ -56,7 +59,11 @@ fileprivate extension ShowDetailsView {
     }
 
     fileprivate func setConstraints() {
-        showImageView.autoPinEdge(toSuperviewEdge: .top, withInset: 20)
+        backButton.autoPinEdge(toSuperviewEdge: .top, withInset: 25)
+        backButton.autoPinEdge(toSuperviewEdge: .left, withInset: 13)
+        backButton.autoSetDimensions(to: CGSize(width: 28, height: 28))
+
+        showImageView.autoPinEdge(.top, to: .top, of: backButton, withOffset: 18)
         showImageView.autoAlignAxis(toSuperviewAxis: .vertical)
         showImageView.autoSetDimensions(to: CGSize(width: 182, height: 273))
 
@@ -70,7 +77,6 @@ fileprivate extension ShowDetailsView {
         subscribeButton.autoPinEdge(.top, to: .bottom, of: yearLabel, withOffset: 20)
         subscribeButton.autoSetDimension(.width, toSize: 195)
         subscribeButton.autoSetDimension(.height, toSize: 45)
-
 
         overviewLabel.autoPinEdge(.top, to: .bottom, of: subscribeButton, withOffset: 43)
 
@@ -88,13 +94,16 @@ fileprivate extension ShowDetailsView {
 fileprivate func createShowImageView() -> UIImageView {
     let showImageView = UIImageView()
 
-    return showImageView
+    showImageView.layer.cornerRadius = 6
+    showImageView.layer.masksToBounds = true
 
+    return showImageView
 }
 
 fileprivate func createOverviewLabel() -> UILabel {
     let overviewLabel = UILabel()
 
+    // TODO: Localize this
     overviewLabel.text = "OVERVIEW"
     overviewLabel.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.bold)
 
@@ -134,6 +143,14 @@ fileprivate func createYearLabel() -> UILabel {
 
     return yearLabel
 
+}
+
+fileprivate func createBackButton() -> UIButton {
+    let backImageView = UIButton()
+
+    backImageView.setImage(UIImage(named: "back_icon"), for: .normal)
+
+    return backImageView
 }
 
 fileprivate func createSubscribeButton() -> UIButton {

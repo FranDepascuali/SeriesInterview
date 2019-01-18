@@ -8,6 +8,7 @@
 
 import UIKit
 import PureLayout
+import ReactiveCocoa
 
 class ShowDetailsViewController: UIViewController {
 
@@ -29,12 +30,28 @@ class ShowDetailsViewController: UIViewController {
         view.addSubview(_view)
         _view.autoPinEdgesToSuperviewEdges()
     }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        _view
+            .backButton
+            .reactive
+            .controlEvents(.touchUpInside)
+            .producer
+            .startWithValues { [unowned self] _ in
+                self.navigationController?.popViewController(animated: true)
+        }
+
+        bindViewModel()
+    }
 }
 
 fileprivate extension ShowDetailsViewController {
 
     fileprivate func bindViewModel() {
-        // TODO: Complete this
+        _view.overviewTextView.text = _viewModel.overview
+        _view.titleLabel.text = _viewModel.title
+        _view.yearLabel.text = _viewModel.year
     }
 
 }
