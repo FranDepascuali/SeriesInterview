@@ -17,13 +17,16 @@ protocol ShowsRepositoryType {
 
 final class ShowsRepository: ShowsRepositoryType {
 
-    let _networkRepository: NetworkRepositoryType
+    fileprivate let _networkRepository: NetworkRepositoryType
+
+    fileprivate let _routes: Routes
 
     fileprivate let _genres: MutableProperty<[Genre]>
 
-    init(networkRepository: NetworkRepositoryType = NetworkRepository()) {
+    init(networkRepository: NetworkRepositoryType = NetworkRepository(), routes: Routes = Routes()) {
         _networkRepository = networkRepository
         _genres = .init([])
+        _routes = routes
     }
 
     func fetchShows() -> SignalProducer<[Show], NoError> {
@@ -37,9 +40,8 @@ final class ShowsRepository: ShowsRepositoryType {
 
         return producer
             .flatMap(.latest) { genres -> SignalProducer<[Show], NoError> in
-                //                return SignalProducer(value: Show.init(json: <#T##JSON#>, allGenres: <#T##[Genre]#>))
                 return self._networkRepository
-                    .request(URL: "https://api.themoviedb.org/3/tv/top_rated?api_key=208ca80d1e219453796a7f9792d16776&language=en-US&page=1")
+                    .request(URL: self._routes.shows())
                     .map { json in
                         guard let rawShows = json["results"].array else {
                             return []
@@ -51,7 +53,7 @@ final class ShowsRepository: ShowsRepositoryType {
 
     fileprivate func fetchGenres() -> SignalProducer<[Genre], NoError> {
         return _networkRepository
-            .request(URL: "https://api.themoviedb.org/3/genre/tv/list?api_key=208ca80d1e219453796a7f9792d16776&language=en-US")
+            .request(URL: _routes.genres())
             .map { json in
                 guard let rawGenres = json["genres"].array else {
                     return []

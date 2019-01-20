@@ -11,12 +11,40 @@ import ReactiveSwift
 import SwiftyJSON
 import Alamofire
 
+struct Routes {
+
+    fileprivate let baseURL: NSURL
+
+    fileprivate let apiKey: String
+
+    init(apiKey: String = "208ca80d1e219453796a7f9792d16776",
+         baseURL: NSURL = NSURL(string: "https://api.themoviedb.org/3")!) {
+        self.baseURL = baseURL
+        self.apiKey = apiKey
+    }
+
+    func shows() -> String {
+        return "\(baseURL)/tv/top_rated?api_key=\(apiKey)&language=en-US&page=1"
+    }
+
+    func genres() -> String {
+        return "\(baseURL)/genre/tv/list?api_key=\(apiKey)&language=en-US"
+    }
+
+
+}
+
 protocol NetworkRepositoryType {
 
     func request(URL: String) -> SignalProducer<JSON, NoError>
 }
 
 class NetworkRepository: NetworkRepositoryType {
+
+    // TODO: hide api key
+    init() {
+
+    }
 
     // TODO: Error type
     func request(URL: String) -> SignalProducer<JSON, NoError> {
