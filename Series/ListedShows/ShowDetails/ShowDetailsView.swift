@@ -183,6 +183,7 @@ fileprivate func createSubscribeButton() -> UIButton {
     // TODO: Move to localizable
     subscribeButton.setTitle("SUBSCRIBE", for: .normal)
     subscribeButton.layer.cornerRadius = 20
+    subscribeButton.layer.masksToBounds = true
     subscribeButton.layer.borderColor = UIColor.white.cgColor
     subscribeButton.layer.borderWidth = 2
     subscribeButton.titleLabel?.font = .boldSystemFont(ofSize: 16)

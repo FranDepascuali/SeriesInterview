@@ -17,6 +17,8 @@ final class ShowPreviewCell: UICollectionViewCell {
 
     let genreLabel: UILabel = createGenreLabel()
 
+    let genreContainer: UIView = createGenreContainerView()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubviews()
@@ -45,15 +47,20 @@ fileprivate extension ShowPreviewCell {
     fileprivate func addSubviews() {
         contentView.addSubview(backgroundImageView)
         contentView.addSubview(titleLabel)
-        contentView.addSubview(genreLabel)
+//        contentView.addSubview(genreLabel)
+        contentView.addSubview(genreContainer)
+        genreContainer.addSubview(genreLabel)
     }
 
     fileprivate func setConstraints() {
-        genreLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 7)
-        genreLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 7)
+        genreContainer.autoPinEdge(toSuperviewEdge: .right, withInset: 7)
+        genreContainer.autoPinEdge(toSuperviewEdge: .top, withInset: 7)
+        genreLabel.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets(top: 5, left: 15, bottom: 5, right: 15))
 
         titleLabel.autoPinEdge(toSuperviewEdge: .bottom, withInset: 15)
         titleLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 15)
+        // Just in case there is a long text, trim it
+        titleLabel.autoPinEdge(toSuperviewEdge: .right)
 
         backgroundImageView.autoPinEdgesToSuperviewEdges()
     }
@@ -78,9 +85,19 @@ fileprivate func createTitleLabel() -> UILabel {
 fileprivate func createGenreLabel() -> UILabel {
     let genreLabel = UILabel()
 
-    genreLabel.backgroundColor = UIColor(hexString: "#1e2b31")
     genreLabel.textColor = .white
+    genreLabel.numberOfLines = 1
     genreLabel.font = UIFont.systemFont(ofSize: 12, weight: UIFont.Weight.bold)
 
     return genreLabel
+}
+
+fileprivate func createGenreContainerView() -> UIView {
+    let genreContainer = UIView()
+
+    genreContainer.backgroundColor = UIColor(hexString: "#1e2b31")
+    genreContainer.layer.cornerRadius = 3
+    genreContainer.layer.masksToBounds = true
+
+    return genreContainer
 }

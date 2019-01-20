@@ -19,21 +19,48 @@ final class ShowsRepository: ShowsRepositoryType {
 
     let _networkRepository: NetworkRepositoryType
 
+    fileprivate let _genres: MutableProperty<[Genre]>
+
     init(networkRepository: NetworkRepositoryType = NetworkRepository()) {
         _networkRepository = networkRepository
+        _genres = .init([])
     }
 
     func fetchShows() -> SignalProducer<[Show], NoError> {
-        return _networkRepository
-            .request(URL: "https://api.themoviedb.org/3/tv/top_rated?api_key=208ca80d1e219453796a7f9792d16776&language=en-US&page=1")
-            .take(first: 1)
-            .map { json in
-                let data = try! json["results"].rawData()
-                let decoder = JSONDecoder()
-                decoder.dateDecodingStrategy = JSONDecoder.DateDecodingStrategy.formatted(DateFormatter.yyyyMMdd)
-                let shows: [Show] = try! decoder.decode([Show].self, from: data)
-                return shows
+        let producer: SignalProducer<[Genre], NoError>
+
+        if !_genres.value.isEmpty {
+            producer = _genres.producer
+        } else {
+            producer = fetchGenres()
         }
+
+        return producer
+            .flatMap(.latest) { genres -> SignalProducer<[Show], NoError> in
+                //                return SignalProducer(value: Show.init(json: <#T##JSON#>, allGenres: <#T##[Genre]#>))
+                return self._networkRepository
+                    .request(URL: "https://api.themoviedb.org/3/tv/top_rated?api_key=208ca80d1e219453796a7f9792d16776&language=en-US&page=1")
+                    .map { json in
+                        guard let rawShows = json["results"].array else {
+                            return []
+                        }
+                        return rawShows.compactMap { Show.init(json: $0, allGenres: genres) }
+                }
+        }
+    }
+
+    fileprivate func fetchGenres() -> SignalProducer<[Genre], NoError> {
+        return _networkRepository
+            .request(URL: "https://api.themoviedb.org/3/genre/tv/list?api_key=208ca80d1e219453796a7f9792d16776&language=en-US")
+            .map { json in
+                guard let rawGenres = json["genres"].array else {
+                    return []
+                }
+                return rawGenres.compactMap { Genre.init(json: $0) }
+            }
+            .on(value: { genres in
+                self._genres.value = genres
+            })
     }
 
 }

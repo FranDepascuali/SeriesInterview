@@ -17,7 +17,7 @@ struct ShowPreviewCellViewModel {
     }
 
     var genre: String {
-        return _show.genre
+        return _show.genres.first?.name ?? ""
     }
 
     var title: String {
