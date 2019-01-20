@@ -36,6 +36,8 @@ final class ListedShowsViewController: UIViewController {
         _view.allShows.delegate = self
         _view.allShows.register(ShowPreviewCell.self, forCellWithReuseIdentifier: "ShowPreviewCell")
         navigationController?.navigationBar.isHidden = true
+
+        bindViewModel()
     }
 }
 
@@ -68,7 +70,8 @@ fileprivate extension ListedShowsViewController {
 
     fileprivate func bindViewModel() {
         _viewModel
-            .fetchShows
+            .fetchShows()
+            .producer
             .startWithValues { [unowned self] _ in
                 self._view.allShows.reloadData()
         }

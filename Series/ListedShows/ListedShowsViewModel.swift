@@ -12,19 +12,26 @@ class ListedShowsViewModel {
 
     fileprivate let _showsRepository: ShowsRepositoryType
 
-    fileprivate let _shows: ReadOnlyProperty<[Show]>
+    fileprivate let _shows: MutableProperty<[Show]> = .init([])
 
-    let fetchShows: SignalProducer<(), NoError>
+    let shows: ReadOnlyProperty<[Show]>
 
     init(showsRepository: ShowsRepositoryType) {
+        shows = ReadOnlyProperty(_shows)
         _showsRepository = showsRepository
-        _shows = ReadOnlyProperty(initial: [], then: _showsRepository.fetchShows())
-
-        fetchShows = _shows.producer.map { _ in }
     }
 
     func numberOfShows() -> Int {
         return _shows.value.count
+    }
+
+    func fetchShows() -> SignalProducer<(), NoError> {
+        return _showsRepository
+            .fetchShows()
+            .on(value: { [unowned self] shows in
+                self._shows.value = shows
+            })
+            .map { _ in }
     }
 
     func createShowPreviewCellViewModel(forIndex index: Int) -> ShowPreviewCellViewModel {
