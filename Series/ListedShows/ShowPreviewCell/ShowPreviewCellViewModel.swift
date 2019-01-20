@@ -23,5 +23,15 @@ struct ShowPreviewCellViewModel {
     var title: String {
         return _show.title
     }
+
+    var posterURL: String {
+        // TODO: Change this
+        return "https://image.tmdb.org/t/p/w200/\(_show.relativePosterImageURL)"
+    }
+
+    var backdropURL: String {
+        // TODO: Change this
+        return "https://image.tmdb.org/t/p/w200/\(_show.relativeBackdropImageURL)"
+    }
 }
 

@@ -31,7 +31,13 @@ final class ShowDetailsViewModel {
         return "\(calendar.component(.year, from: date))"
     }
 
-    //        var year: String {
-    //            return
-    //        }
+    var posterURL: String {
+        // TODO: Change this
+        return "https://image.tmdb.org/t/p/w200/\(_show.relativePosterImageURL)"
+    }
+
+    var backdropURL: String {
+        // TODO: Change this
+        return "https://image.tmdb.org/t/p/w1280/\(_show.relativeBackdropImageURL)"
+    }
 }

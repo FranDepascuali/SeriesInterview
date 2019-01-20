@@ -9,6 +9,7 @@
 import UIKit
 import PureLayout
 import ReactiveCocoa
+import UIImageColors
 
 class ShowDetailsViewController: UIViewController {
 
@@ -52,6 +53,12 @@ fileprivate extension ShowDetailsViewController {
         _view.overviewTextView.text = _viewModel.overview
         _view.titleLabel.text = _viewModel.title
         _view.yearLabel.text = _viewModel.year
+        _view.showImageView.sd_setImage(with: URL(string: _viewModel.posterURL), completed: { [unowned self] image, error, cacheType, imageURL in
+            // TODO: avoid dereferencing
+            let imageColors = image!.getColors()
+            self._view.opacityView.backgroundColor = imageColors.primary
+        })
+        _view.backgroundImageView.sd_setImage(with: URL(string: _viewModel.backdropURL))
     }
 
 }

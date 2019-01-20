@@ -10,6 +10,10 @@ import UIKit
 
 class ShowDetailsView: UIView {
 
+    let backgroundImageView: UIImageView = createBackgroundImageView()
+
+    let opacityView: UIView = createOpacityView()
+
     let backButton: UIButton = createBackButton()
 
     let showImageView: UIImageView = createShowImageView()
@@ -39,16 +43,18 @@ class ShowDetailsView: UIView {
 fileprivate extension ShowDetailsView {
 
     fileprivate func fake() {
-        showImageView.image = UIImage(named: "sample")
+//        showImageView.image = UIImage(named: "sample")
 //        titleLabel.text = "Breaking Bad"
 //        yearLabel.text = "2011"
 //        overviewTextView.text = "Breaking Bad is an American neo-western crime drama television series created and produced by Vince Gilligan. The show originally aired on AMC for five seasons, from January 20, 2008 to September 29, 2013. Set and filmed in Albuquerque, New Mexico, the series tells the story of Walter White (Bryan Cranston), a struggling and depressed high school chemistry teacher who is diagnosed with lung cancer. Together with his former student Jesse Pinkman (Aaron Paul), White turns to a life of crime by producing and selling crystallized methamphetamine to secure his family's financial future before he dies, while navigating the dangers of the criminal world. "
 
         //        backgroundColor = UIColor(red: 225, green: 184, blue: 85, alpha: 0)
-        backgroundColor = .red
+//        backgroundColor = .red
     }
 
     fileprivate func addSubviews() {
+        addSubview(opacityView)
+        addSubview(backgroundImageView)
         addSubview(backButton)
         addSubview(titleLabel)
         addSubview(showImageView)
@@ -56,9 +62,15 @@ fileprivate extension ShowDetailsView {
         addSubview(overviewLabel)
         addSubview(overviewTextView)
         addSubview(subscribeButton)
+
+        sendSubviewToBack(opacityView)
+        sendSubviewToBack(backgroundImageView)
     }
 
     fileprivate func setConstraints() {
+        backgroundImageView.autoPinEdgesToSuperviewEdges()
+        opacityView.autoPinEdgesToSuperviewEdges()
+
         backButton.autoPinEdge(toSuperviewEdge: .top, withInset: 25)
         backButton.autoPinEdge(toSuperviewEdge: .left, withInset: 13)
         backButton.autoSetDimensions(to: CGSize(width: 28, height: 28))
@@ -71,7 +83,7 @@ fileprivate extension ShowDetailsView {
         titleLabel.autoAlignAxis(toSuperviewAxis: .vertical)
 
         yearLabel.autoAlignAxis(.vertical, toSameAxisOf: titleLabel)
-        yearLabel.autoPinEdge(.top, to: .bottom, of: titleLabel, withOffset: 20)
+        yearLabel.autoPinEdge(.top, to: .bottom, of: titleLabel, withOffset: 2)
 
         subscribeButton.autoAlignAxis(.vertical, toSameAxisOf: titleLabel)
         subscribeButton.autoPinEdge(.top, to: .bottom, of: yearLabel, withOffset: 20)
@@ -98,6 +110,15 @@ fileprivate func createShowImageView() -> UIImageView {
     showImageView.layer.masksToBounds = true
 
     return showImageView
+}
+
+fileprivate func createBackgroundImageView() -> UIImageView {
+    let backgroundImageView = UIImageView()
+
+    backgroundImageView.contentMode = .scaleAspectFill
+    backgroundImageView.clipsToBounds = true
+//    backgroundImageView.
+    return backgroundImageView
 }
 
 fileprivate func createOverviewLabel() -> UILabel {
@@ -139,7 +160,7 @@ fileprivate func createYearLabel() -> UILabel {
 
     yearLabel.textColor = .white
     yearLabel.textAlignment = .center
-    yearLabel.alpha = 0.2
+    yearLabel.alpha = 0.8
 
     return yearLabel
 
@@ -165,4 +186,12 @@ fileprivate func createSubscribeButton() -> UIButton {
 
     return subscribeButton
 
+}
+
+fileprivate func createOpacityView() -> UIView {
+    let opacityView = UIView()
+
+    opacityView.alpha = 0.9
+
+    return opacityView
 }

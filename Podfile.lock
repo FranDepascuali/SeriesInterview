@@ -12,6 +12,7 @@ PODS:
     - SDWebImage/Core (= 4.4.3)
   - SDWebImage/Core (4.4.3)
   - SwiftyJSON (4.2.0)
+  - UIImageColors (2.0.1)
 
 DEPENDENCIES:
   - Alamofire (= 4.7.3)
@@ -22,7 +23,8 @@ DEPENDENCIES:
   - ReactiveSwift (= 4.0.0)
   - Result (= 4.1.0)
   - SDWebImage (= 4.4.3)
-  - SwiftyJSON (~> 4.0)
+  - SwiftyJSON (= 4.2.0)
+  - UIImageColors (= 2.0.1)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -35,6 +37,7 @@ SPEC REPOS:
     - Result
     - SDWebImage
     - SwiftyJSON
+    - UIImageColors
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
@@ -46,7 +49,8 @@ SPEC CHECKSUMS:
   Result: bd966fac789cc6c1563440b348ab2598cc24d5c7
   SDWebImage: c5594f1a19c48d526d321e548902b56b479cd508
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
+  UIImageColors: c83669aff7ceb55a3b3f2c398f3b5c14632a267b
 
-PODFILE CHECKSUM: 90b058300e83ac9f6e0e8487e67a2d4533af1780
+PODFILE CHECKSUM: b2dd72354dcfa7c7efa3fb14d2a0daf398750433
 
 COCOAPODS: 1.5.3

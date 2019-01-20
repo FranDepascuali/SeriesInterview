@@ -13,13 +13,33 @@ protocol ShowsRepositoryType {
 
     // TODO: Change this
     func fetchShows() -> SignalProducer<[Show], NoError>
+}
+
+final class ShowsRepository: ShowsRepositoryType {
+
+    let _networkRepository: NetworkRepositoryType
+
+    init(networkRepository: NetworkRepositoryType = NetworkRepository()) {
+        _networkRepository = networkRepository
+    }
+
+    func fetchShows() -> SignalProducer<[Show], NoError> {
+        return .empty
+    }
 
 }
 
 final class FakeShowsRepository: ShowsRepositoryType {
 
     func fetchShows() -> SignalProducer<[Show], NoError> {
-        return SignalProducer(value: [Show.breakingBad, Show.hawaiFive, Show.breakingBad, Show.hawaiFive])
+        return SignalProducer(value: [
+            Show.supergirl,
+            Show.supergirl,
+            Show.sherlock,
+            Show.breakingBad,
+            Show.hawaiFive,
+            Show.breakingBad,
+            Show.hawaiFive])
     }
 
 }

@@ -17,7 +17,9 @@ def app_pods
 
   pod 'SDWebImage', '4.4.3'
   pod 'Alamofire', '4.7.3'
-  pod 'SwiftyJSON', '~> 4.0'
+  pod 'SwiftyJSON', '4.2.0'
+
+  pod 'UIImageColors', '2.0.1'
 end
 
 # There are no targets called "App" in any Xcode projects

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 final class ShowPreviewCell: UICollectionViewCell {
 
@@ -34,7 +35,7 @@ final class ShowPreviewCell: UICollectionViewCell {
     func bindViewModel(viewModel: ShowPreviewCellViewModel) {
         genreLabel.text = viewModel.genre
         titleLabel.text = viewModel.title
-//        thumb.sd_setImage(with: URL(string: viewModel.thumbURL), placeholderImage: UIImage(named: "placeholder"))
+        backgroundImageView.sd_setImage(with: URL(string: viewModel.backdropURL))
     }
 
 }
