@@ -80,9 +80,11 @@ fileprivate extension ShowDetailsView {
         showImageView.autoSetDimensions(to: CGSize(width: 182, height: 273))
 
         titleLabel.autoPinEdge(.top, to: .bottom, of: showImageView, withOffset: 20)
+        titleLabel.autoSetDimension(.height, toSize: 28)
         titleLabel.autoAlignAxis(toSuperviewAxis: .vertical)
 
         yearLabel.autoAlignAxis(.vertical, toSameAxisOf: titleLabel)
+        yearLabel.autoSetDimension(.height, toSize: 18)
         yearLabel.autoPinEdge(.top, to: .bottom, of: titleLabel, withOffset: 2)
 
         subscribeButton.autoAlignAxis(.vertical, toSameAxisOf: titleLabel)
@@ -91,10 +93,10 @@ fileprivate extension ShowDetailsView {
         subscribeButton.autoSetDimension(.height, toSize: 45)
 
         overviewLabel.autoPinEdge(.top, to: .bottom, of: subscribeButton, withOffset: 43)
-
+        overviewLabel.autoSetDimension(.height, toSize: 18)
         overviewLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 37)
 
-        overviewTextView.autoPinEdge(.top, to: .bottom, of: overviewLabel, withOffset: 20)
+        overviewTextView.autoPinEdge(.top, to: .bottom, of: overviewLabel, withOffset: 12)
         overviewTextView.autoPinEdge(.left, to: .left, of: overviewLabel)
 
         // TODO: Take this out
@@ -117,7 +119,7 @@ fileprivate func createBackgroundImageView() -> UIImageView {
 
     backgroundImageView.contentMode = .scaleAspectFill
     backgroundImageView.clipsToBounds = true
-//    backgroundImageView.
+
     return backgroundImageView
 }
 
@@ -160,6 +162,7 @@ fileprivate func createYearLabel() -> UILabel {
 
     yearLabel.textColor = .white
     yearLabel.textAlignment = .center
+    yearLabel.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.regular)
     yearLabel.alpha = 0.8
 
     return yearLabel
