@@ -70,21 +70,6 @@ final class ShowsRepository: ShowsRepositoryType {
 
 }
 
-final class FakeShowsRepository: ShowsRepositoryType {
-
-    func fetchShows() -> SignalProducer<[Show], NoError> {
-        return SignalProducer(value: [
-            Show.supergirl,
-            Show.supergirl,
-            Show.sherlock,
-            Show.breakingBad,
-            Show.hawaiFive,
-            Show.breakingBad,
-            Show.hawaiFive])
-    }
-
-}
-
 extension DateFormatter {
     static let yyyyMMdd: DateFormatter = {
         let formatter = DateFormatter()

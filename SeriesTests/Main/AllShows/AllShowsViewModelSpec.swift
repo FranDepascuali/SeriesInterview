@@ -14,37 +14,40 @@ class AllShowsViewModelSpec: QuickSpec {
 
     override func spec() {
 
-        var allShowsViewModelSpec: AllShowsViewModel!
+        var allShowsViewModel: AllShowsViewModel!
+
+        var mockedShowsRepository: MockedShowsRepository!
+
+        var mockedUserRepository: MockedUserRepository!
 
         beforeEach {
-
+            mockedShowsRepository = MockedShowsRepository()
+            mockedUserRepository = MockedUserRepository()
+            allShowsViewModel = AllShowsViewModel(
+                showsRepository: mockedShowsRepository,
+                userRepository: mockedUserRepository
+            )
         }
 
-        describe("#restartScanning") {
+        describe("#numberOfShows") {
 
-            context("When executed") {
+            context("When there are no shows") {
 
-                it("should emit a restart scan alert") {
-//                    scanUIViewModel
-//                        .presentedAlert
-//                        .producer
-//                        .skipDefaultValue()
-//                        .take(first: 1)
-//                        .startWithValues {
-//                            expect($0?.actions.first?.title) == "Restart Scan"
-//                    }
-//
-//                    scanUIViewModel
-//                        .restartScanning
-//                        .apply()
-//                        .take(first: 1)
-//                        .start()
+                it("should return 0") {
+                    mockedShowsRepository.shows = []
+                    expect(allShowsViewModel.numberOfShows()) == 0
                 }
-
             }
 
-        }
+            context("When there are shows") {
 
+                it("should return the number of shows") {
+                    mockedShowsRepository.shows = [Show.breakingBad, Show.hawaiFive]
+                    _ = allShowsViewModel.fetchShows().wait()
+                    expect(allShowsViewModel.numberOfShows()).toEventually(be(mockedShowsRepository.shows.count))
+                }
+            }
+        }
     }
 
 }

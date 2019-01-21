@@ -53,10 +53,9 @@ final class ShowDetailsViewModel {
     }
 
     var year: String {
-        let date = Date()
         let calendar = Calendar.current
 
-        return "\(calendar.component(.year, from: date))"
+        return "\(calendar.component(.year, from: _show.airDate))"
     }
 
     var posterURL: String {

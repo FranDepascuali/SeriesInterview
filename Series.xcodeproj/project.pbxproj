@@ -31,6 +31,10 @@
 		0B9E950521F67272004A0707 /* AllShowsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9E950421F67272004A0707 /* AllShowsView.swift */; };
 		0B9E950B21F67563004A0707 /* AllShowsViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9E950A21F67563004A0707 /* AllShowsViewModelSpec.swift */; };
 		0B9E950D21F67576004A0707 /* SubscribedShowsViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9E950C21F67576004A0707 /* SubscribedShowsViewModelSpec.swift */; };
+		0B9E951021F677A5004A0707 /* MockedUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9E950F21F677A5004A0707 /* MockedUserRepository.swift */; };
+		0B9E951221F677EB004A0707 /* MockedShowsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9E951121F677EB004A0707 /* MockedShowsRepository.swift */; };
+		0B9E951521F67863004A0707 /* MockedShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9E951421F67863004A0707 /* MockedShow.swift */; };
+		0B9E951821F67F9F004A0707 /* ShowDetailsViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9E951721F67F9F004A0707 /* ShowDetailsViewModelSpec.swift */; };
 		0BBDAA1321EEBCB600C4F3CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBDAA1221EEBCB600C4F3CF /* AppDelegate.swift */; };
 		0BBDAA1521EEBCB600C4F3CF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBDAA1421EEBCB600C4F3CF /* ViewController.swift */; };
 		0BBDAA1A21EEBCB800C4F3CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0BBDAA1921EEBCB800C4F3CF /* Assets.xcassets */; };
@@ -79,6 +83,10 @@
 		0B9E950421F67272004A0707 /* AllShowsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllShowsView.swift; sourceTree = "<group>"; };
 		0B9E950A21F67563004A0707 /* AllShowsViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllShowsViewModelSpec.swift; sourceTree = "<group>"; };
 		0B9E950C21F67576004A0707 /* SubscribedShowsViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribedShowsViewModelSpec.swift; sourceTree = "<group>"; };
+		0B9E950F21F677A5004A0707 /* MockedUserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedUserRepository.swift; sourceTree = "<group>"; };
+		0B9E951121F677EB004A0707 /* MockedShowsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedShowsRepository.swift; sourceTree = "<group>"; };
+		0B9E951421F67863004A0707 /* MockedShow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedShow.swift; sourceTree = "<group>"; };
+		0B9E951721F67F9F004A0707 /* ShowDetailsViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDetailsViewModelSpec.swift; sourceTree = "<group>"; };
 		0BBDAA0F21EEBCB600C4F3CF /* Series.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Series.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BBDAA1221EEBCB600C4F3CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0BBDAA1421EEBCB600C4F3CF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -210,9 +218,35 @@
 		0B9E950921F6754A004A0707 /* AllShows */ = {
 			isa = PBXGroup;
 			children = (
+				0B9E951621F67F94004A0707 /* ShowDetails */,
 				0B9E950A21F67563004A0707 /* AllShowsViewModelSpec.swift */,
 			);
 			path = AllShows;
+			sourceTree = "<group>";
+		};
+		0B9E950E21F67794004A0707 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				0B9E950F21F677A5004A0707 /* MockedUserRepository.swift */,
+				0B9E951121F677EB004A0707 /* MockedShowsRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		0B9E951321F67852004A0707 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0B9E951421F67863004A0707 /* MockedShow.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		0B9E951621F67F94004A0707 /* ShowDetails */ = {
+			isa = PBXGroup;
+			children = (
+				0B9E951721F67F9F004A0707 /* ShowDetailsViewModelSpec.swift */,
+			);
+			path = ShowDetails;
 			sourceTree = "<group>";
 		};
 		0BBDAA0621EEBCB600C4F3CF = {
@@ -256,6 +290,8 @@
 		0BBDAA2621EEBCB800C4F3CF /* SeriesTests */ = {
 			isa = PBXGroup;
 			children = (
+				0B9E950E21F67794004A0707 /* Repositories */,
+				0B9E951321F67852004A0707 /* Models */,
 				0B9E950721F6752E004A0707 /* Main */,
 				0BBDAA2721EEBCB800C4F3CF /* SeriesTests.swift */,
 				0BBDAA2921EEBCB800C4F3CF /* Info.plist */,
@@ -571,6 +607,10 @@
 			files = (
 				0B9E950D21F67576004A0707 /* SubscribedShowsViewModelSpec.swift in Sources */,
 				0B9E950B21F67563004A0707 /* AllShowsViewModelSpec.swift in Sources */,
+				0B9E951021F677A5004A0707 /* MockedUserRepository.swift in Sources */,
+				0B9E951821F67F9F004A0707 /* ShowDetailsViewModelSpec.swift in Sources */,
+				0B9E951521F67863004A0707 /* MockedShow.swift in Sources */,
+				0B9E951221F677EB004A0707 /* MockedShowsRepository.swift in Sources */,
 				0BBDAA2821EEBCB800C4F3CF /* SeriesTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
