@@ -1,8 +1,23 @@
-# SeriesInterview
+# Series Interview
 Exercise to show my coding skills
 
+## Implemented
+1. List of series
+2. Detailed view
+3. Obtain the genre from API
+4. Subscribe to a serie (locally)
+
+## Missing & bugs
+1. ScrollView in details scrolls the whole content. I couldn't figure out how the transition should be from the images.
+2. Search feature
+3. Pagination feature
+4. Spinners are missing for the requests
+5. Errors are not handled
+6. Degrade in shows list is missing
+7. URL was fixed, but it should be retrieved from the API.
+
 ## Screencast
-TBA...
+![series](https://user-images.githubusercontent.com/12101394/51504225-97d7ba00-1dbe-11e9-9882-ffe008367cb4.gif)
 
 ## Bootstrap
 * Clone this repo.
