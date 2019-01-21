@@ -59,6 +59,19 @@ fileprivate extension ShowDetailsViewController {
             self._view.opacityView.backgroundColor = imageColors.primary
         })
         _view.backgroundImageView.sd_setImage(with: URL(string: _viewModel.backdropURL))
+        _view
+            .subscribeButton
+            .reactive
+            .controlEvents(.touchUpInside)
+            .producer
+            .startWithValues { [unowned self] _ in
+                self._viewModel.subscribeTapped()
+        }
+
+        _viewModel
+            .subscribed
+            .producer
+            .startWithValues { [unowned self] in self._view.setSubscriptionStyle(subscribed: $0)}
     }
 
 }

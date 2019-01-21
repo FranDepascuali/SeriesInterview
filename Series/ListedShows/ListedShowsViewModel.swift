@@ -12,13 +12,16 @@ class ListedShowsViewModel {
 
     fileprivate let _showsRepository: ShowsRepositoryType
 
+    fileprivate let _userRepository: UserRepositoryType
+
     fileprivate let _shows: MutableProperty<[Show]> = .init([])
 
     let shows: ReadOnlyProperty<[Show]>
 
-    init(showsRepository: ShowsRepositoryType) {
+    init(showsRepository: ShowsRepositoryType, userRepository: UserRepositoryType) {
         shows = ReadOnlyProperty(_shows)
         _showsRepository = showsRepository
+        _userRepository = userRepository
     }
 
     func numberOfShows() -> Int {
@@ -39,6 +42,6 @@ class ListedShowsViewModel {
     }
 
     func createShowDetailsViewModel(forIndex index: Int) -> ShowDetailsViewModel {
-        return ShowDetailsViewModel(show: _shows.value[index])
+        return ShowDetailsViewModel(show: _shows.value[index], userRepository: _userRepository)
     }
 }

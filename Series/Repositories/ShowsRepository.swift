@@ -11,8 +11,9 @@ import ReactiveSwift
 
 protocol ShowsRepositoryType {
 
-    // TODO: Change this
+    // TODO: Change this (errors)
     func fetchShows() -> SignalProducer<[Show], NoError>
+
 }
 
 final class ShowsRepository: ShowsRepositoryType {
@@ -32,6 +33,8 @@ final class ShowsRepository: ShowsRepositoryType {
     func fetchShows() -> SignalProducer<[Show], NoError> {
         let producer: SignalProducer<[Genre], NoError>
 
+        // This can be better implemented with two types of repositories, a local one and a remote one.
+        // This works for now..
         if !_genres.value.isEmpty {
             producer = _genres.producer
         } else {

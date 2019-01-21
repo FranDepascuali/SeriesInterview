@@ -10,6 +10,10 @@ import UIKit
 
 class ShowDetailsView: UIView {
 
+    let containerScrollView: UIScrollView = createContainerScrollView()
+
+    let contentView: UIView = UIView()
+
     let backgroundImageView: UIImageView = createBackgroundImageView()
 
     let opacityView: UIView = createOpacityView()
@@ -32,42 +36,55 @@ class ShowDetailsView: UIView {
         super.init(frame: .zero)
         addSubviews()
         setConstraints()
-        fake()
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    func setSubscriptionStyle(subscribed: Bool) {
+        if subscribed {
+            subscribeButton.backgroundColor = UIColor.white.withAlphaComponent(45)
+            subscribeButton.setTitle("SUBSCRIBED", for: .normal)
+            subscribeButton.setTitleColor(UIColor(hexString: "#f1be45"), for: .normal)
+        } else {
+            // TODO: Move to localizable
+            subscribeButton.setTitle("SUBSCRIBE", for: .normal)
+            subscribeButton.setTitleColor(.white, for: .normal)
+            subscribeButton.backgroundColor = .clear
+        }
+    }
 }
 
 fileprivate extension ShowDetailsView {
 
-    fileprivate func fake() {
-//        showImageView.image = UIImage(named: "sample")
-//        titleLabel.text = "Breaking Bad"
-//        yearLabel.text = "2011"
-//        overviewTextView.text = "Breaking Bad is an American neo-western crime drama television series created and produced by Vince Gilligan. The show originally aired on AMC for five seasons, from January 20, 2008 to September 29, 2013. Set and filmed in Albuquerque, New Mexico, the series tells the story of Walter White (Bryan Cranston), a struggling and depressed high school chemistry teacher who is diagnosed with lung cancer. Together with his former student Jesse Pinkman (Aaron Paul), White turns to a life of crime by producing and selling crystallized methamphetamine to secure his family's financial future before he dies, while navigating the dangers of the criminal world. "
-
-        //        backgroundColor = UIColor(red: 225, green: 184, blue: 85, alpha: 0)
-//        backgroundColor = .red
-    }
-
     fileprivate func addSubviews() {
+        addSubview(containerScrollView)
         addSubview(opacityView)
         addSubview(backgroundImageView)
         addSubview(backButton)
-        addSubview(titleLabel)
-        addSubview(showImageView)
-        addSubview(yearLabel)
-        addSubview(overviewLabel)
-        addSubview(overviewTextView)
-        addSubview(subscribeButton)
+
+        containerScrollView.addSubview(contentView)
+        contentView.addSubview(titleLabel)
+        contentView.addSubview(showImageView)
+        contentView.addSubview(yearLabel)
+        contentView.addSubview(overviewLabel)
+        contentView.addSubview(overviewTextView)
+        contentView.addSubview(subscribeButton)
 
         sendSubviewToBack(opacityView)
         sendSubviewToBack(backgroundImageView)
     }
 
     fileprivate func setConstraints() {
+        // The width will always match self width, so we pin it. 
+        contentView.autoMatch(.width, to: .width, of: self)
+
+        // Pin every side to the scroll view
+        contentView.autoPinEdgesToSuperviewEdges()
+        // Pin scroll view to self
+        containerScrollView.autoPinEdgesToSuperviewEdges()
+
         backgroundImageView.autoPinEdgesToSuperviewEdges()
         opacityView.autoPinEdgesToSuperviewEdges()
 
@@ -75,7 +92,7 @@ fileprivate extension ShowDetailsView {
         backButton.autoPinEdge(toSuperviewEdge: .left, withInset: 13)
         backButton.autoSetDimensions(to: CGSize(width: 28, height: 28))
 
-        showImageView.autoPinEdge(.top, to: .top, of: backButton, withOffset: 18)
+        showImageView.autoPinEdge(toSuperviewEdge: .top, withInset: 25)
         showImageView.autoAlignAxis(toSuperviewAxis: .vertical)
         showImageView.autoSetDimensions(to: CGSize(width: 182, height: 273))
 
@@ -99,9 +116,10 @@ fileprivate extension ShowDetailsView {
         overviewTextView.autoPinEdge(.top, to: .bottom, of: overviewLabel, withOffset: 12)
         overviewTextView.autoPinEdge(.left, to: .left, of: overviewLabel)
 
-        // TODO: Take this out
-        overviewTextView.autoPinEdge(.bottom, to: .bottom, of: self)
         overviewTextView.autoPinEdge(toSuperviewEdge: .right, withInset: 37)
+        overviewTextView.autoSetDimension(.height, toSize: 500)
+
+        overviewTextView.autoPinEdge(.bottom, to: .bottom, of: contentView)
     }
 }
 
@@ -180,8 +198,6 @@ fileprivate func createBackButton() -> UIButton {
 fileprivate func createSubscribeButton() -> UIButton {
     let subscribeButton = UIButton()
 
-    // TODO: Move to localizable
-    subscribeButton.setTitle("SUBSCRIBE", for: .normal)
     subscribeButton.layer.cornerRadius = 20
     subscribeButton.layer.masksToBounds = true
     subscribeButton.layer.borderColor = UIColor.white.cgColor
@@ -198,4 +214,8 @@ fileprivate func createOpacityView() -> UIView {
     opacityView.alpha = 0.9
 
     return opacityView
+}
+
+fileprivate func createContainerScrollView() -> UIScrollView {
+    return UIScrollView()
 }

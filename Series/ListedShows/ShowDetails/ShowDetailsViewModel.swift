@@ -6,14 +6,42 @@
 //  Copyright © 2019 depa. All rights reserved.
 //
 
-import Foundation
+import ReactiveSwift
 
 final class ShowDetailsViewModel {
 
     fileprivate let _show: Show
 
-    init(show: Show) {
+    fileprivate let _userRepository: UserRepositoryType
+
+    fileprivate let _subscribed: MutableProperty<Bool>
+
+    let subscribed: ReadOnlyProperty<Bool>
+
+    init(show: Show, userRepository: UserRepositoryType) {
         _show = show
+        _userRepository = userRepository
+        _subscribed = .init(_userRepository.currentUser.value.subscribedTo.contains(_show))
+        subscribed = ReadOnlyProperty(_subscribed)
+    }
+
+    func subscribeTapped() {
+        if subscribed.value {
+            _userRepository
+                .unsubscribe(from: _show)
+                .on(value: { [unowned self] _ in
+                    self._subscribed.value = false
+                })
+                .start()
+        } else {
+            _userRepository
+                .subscribe(to: _show)
+                .on(value: { [unowned self] _ in
+                    self._subscribed.value = true
+                })
+                .start()
+        }
+
     }
 
     var overview: String {
