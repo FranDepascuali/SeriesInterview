@@ -14,14 +14,14 @@ final class MainViewController: UIViewController {
 
     fileprivate let _subscribedShowsViewController: SubscribedShowsViewController
 
-    fileprivate let _allShowsViewController: ListedShowsViewController
+    fileprivate let _allShowsViewController: AllShowsViewController
 
     fileprivate let _viewModel: MainViewModel
 
     init(viewModel: MainViewModel) {
         _viewModel = viewModel
         _subscribedShowsViewController = SubscribedShowsViewController(viewModel: _viewModel.createSubscribedShowsViewModel())
-        _allShowsViewController = ListedShowsViewController(viewModel: _viewModel.createAllShowsViewModel())
+        _allShowsViewController = AllShowsViewController(viewModel: _viewModel.createAllShowsViewModel())
         super.init(nibName: nil, bundle: nil)
     }
 

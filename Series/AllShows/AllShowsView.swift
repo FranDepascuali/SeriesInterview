@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ListedShowsView: UIView {
+class AllShowsView: UIView {
 
     // I think this is better than tableView because collection views
     // are more adaptable to new layouts. So, if there is a change in
@@ -26,7 +26,7 @@ class ListedShowsView: UIView {
     }
 }
 
-fileprivate extension ListedShowsView {
+fileprivate extension AllShowsView {
 
     fileprivate func addSubviews() {
         addSubview(allShows)

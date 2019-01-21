@@ -8,13 +8,13 @@
 
 import UIKit
 
-final class ListedShowsViewController: UIViewController {
+final class AllShowsViewController: UIViewController {
 
-    fileprivate let _view = ListedShowsView()
+    fileprivate let _view = AllShowsView()
 
-    fileprivate let _viewModel: ListedShowsViewModel
+    fileprivate let _viewModel: AllShowsViewModel
 
-    init(viewModel: ListedShowsViewModel) {
+    init(viewModel: AllShowsViewModel) {
         _viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -42,7 +42,7 @@ final class ListedShowsViewController: UIViewController {
 }
 
 //TODO: white scrolling indicator 
-extension ListedShowsViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension AllShowsViewController: UICollectionViewDataSource, UICollectionViewDelegate {
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -66,7 +66,7 @@ extension ListedShowsViewController: UICollectionViewDataSource, UICollectionVie
     }
 }
 
-fileprivate extension ListedShowsViewController {
+fileprivate extension AllShowsViewController {
 
     fileprivate func bindViewModel() {
         _viewModel

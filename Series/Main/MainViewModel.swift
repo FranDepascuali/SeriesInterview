@@ -27,7 +27,7 @@ final class MainViewModel {
         return SubscribedShowsViewModel(userRepository: _userRepository)
     }
 
-    func createAllShowsViewModel() -> ListedShowsViewModel {
-        return ListedShowsViewModel(showsRepository: _showsRepository, userRepository: _userRepository)
+    func createAllShowsViewModel() -> AllShowsViewModel {
+        return AllShowsViewModel(showsRepository: _showsRepository, userRepository: _userRepository)
     }
 }

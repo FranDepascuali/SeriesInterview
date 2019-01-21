@@ -16,16 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        window = UIWindow(frame: UIScreen.main.bounds)
-//        let nav = UINavigationController(rootViewController: ListedShowsViewController(viewModel: ListedShowsViewModel(showsRepository: ShowsRepository(), userRepository: UserRepository())))
-//        window!.rootViewController = nav
-
-
-        let mainViewModel = MainViewModel(userRepository: UserRepository(), showsRepository: ShowsRepository())
-        window!.rootViewController = UINavigationController(rootViewController: MainViewController(viewModel: mainViewModel))
-
         UINavigationBar.appearance().barStyle = .black
+
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window!.rootViewController = createRootController()
         window!.makeKeyAndVisible()
+
         return true
     }
 
@@ -52,4 +48,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 
+}
+
+fileprivate func createRootController() -> UIViewController {
+    let mainViewModel = MainViewModel(userRepository: UserRepository(), showsRepository: ShowsRepository())
+     return UINavigationController(rootViewController: MainViewController(viewModel: mainViewModel))
 }

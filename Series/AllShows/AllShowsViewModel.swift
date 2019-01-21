@@ -8,7 +8,7 @@
 
 import ReactiveSwift
 
-class ListedShowsViewModel {
+class AllShowsViewModel {
 
     fileprivate let _showsRepository: ShowsRepositoryType
 
