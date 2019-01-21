@@ -16,10 +16,10 @@ class AllShowsViewModel {
 
     fileprivate let _shows: MutableProperty<[Show]> = .init([])
 
-    let shows: ReadOnlyProperty<[Show]>
+    let shows: ReadOnlyProperty<()>
 
     init(showsRepository: ShowsRepositoryType, userRepository: UserRepositoryType) {
-        shows = ReadOnlyProperty(_shows)
+        shows = ReadOnlyProperty(_shows).map { _ in }
         _showsRepository = showsRepository
         _userRepository = userRepository
     }
