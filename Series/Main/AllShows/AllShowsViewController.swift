@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ReactiveSwift
 
 final class AllShowsViewController: UIViewController {
 
@@ -62,7 +63,15 @@ extension AllShowsViewController: UICollectionViewDataSource, UICollectionViewDe
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        navigationController?.pushViewController(ShowDetailsViewController(viewModel: _viewModel.createShowDetailsViewModel(forIndex: indexPath.row)), animated: true)
+        let showDetailsViewModel = _viewModel.createShowDetailsViewModel(forIndex: indexPath.row)
+
+        showDetailsViewModel
+            .loadImage()
+            .producer
+            .observe(on: UIScheduler())
+            .startWithValues { _ in
+                self.navigationController?.pushViewController(ShowDetailsViewController(viewModel: showDetailsViewModel), animated: true)
+        }
     }
 }
 

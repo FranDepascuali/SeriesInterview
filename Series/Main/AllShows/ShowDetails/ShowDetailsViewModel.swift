@@ -16,13 +16,27 @@ final class ShowDetailsViewModel {
 
     fileprivate let _subscribed: MutableProperty<Bool>
 
+    fileprivate let _posterImage: MutableProperty<UIImage?> = .init(nil)
+
     let subscribed: ReadOnlyProperty<Bool>
+
+    let posterImage: ReadOnlyProperty<UIImage?>
 
     init(show: Show, userRepository: UserRepositoryType) {
         _show = show
         _userRepository = userRepository
         _subscribed = .init(_userRepository.currentUser.value.subscribedTo.contains(_show))
         subscribed = ReadOnlyProperty(_subscribed)
+
+        posterImage = ReadOnlyProperty(_posterImage)
+    }
+
+    func loadImage() -> SignalProducer<(), NoError> {
+        return imageFromUrl(urlString: posterURL)
+            .on(value: { image in
+                self._posterImage.value = image
+            })
+            .map { _ in }
     }
 
     func subscribeTapped() {
@@ -66,5 +80,24 @@ final class ShowDetailsViewModel {
     var backdropURL: String {
         // TODO: Change this
         return "https://image.tmdb.org/t/p/w1280/\(_show.relativeBackdropImageURL)"
+    }
+}
+
+// TODO: This should be moved from here
+func imageFromUrl(urlString: String) -> SignalProducer<UIImage, NoError> {
+    return SignalProducer.init { observer, lifetime in
+        URLSession
+            .shared
+            .dataTask(with: URL(string: urlString)!, completionHandler: { (data, response, error) in
+                if
+                    let data = data,
+                    let image = UIImage(data: data) {
+                    observer.send(value: image)
+                    observer.sendCompleted()
+                } else {
+                    observer.sendCompleted()
+                }
+            })
+            .resume()
     }
 }

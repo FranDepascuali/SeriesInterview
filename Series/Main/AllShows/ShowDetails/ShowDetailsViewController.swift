@@ -53,11 +53,19 @@ fileprivate extension ShowDetailsViewController {
         _view.overviewTextView.text = _viewModel.overview
         _view.titleLabel.text = _viewModel.title
         _view.yearLabel.text = _viewModel.year
-        _view.showImageView.sd_setImage(with: URL(string: _viewModel.posterURL), completed: { [unowned self] image, error, cacheType, imageURL in
-            // TODO: avoid dereferencing
-            let imageColors = image!.getColors()
+
+        if let posterImage = _viewModel.posterImage.value {
+            let imageColors = posterImage.getColors()
             self._view.opacityView.backgroundColor = imageColors.primary
-        })
+            _view.showImageView.sd_setImage(with: URL(string: _viewModel.posterURL))
+        } else {
+            _view.showImageView.sd_setImage(with: URL(string: _viewModel.posterURL), completed: { [unowned self] image, error, cacheType, imageURL in
+                // TODO: avoid dereferencing
+                let imageColors = image!.getColors()
+                self._view.opacityView.backgroundColor = imageColors.primary
+            })
+        }
+
         _view.backgroundImageView.sd_setImage(with: URL(string: _viewModel.backdropURL))
         _view
             .subscribeButton
