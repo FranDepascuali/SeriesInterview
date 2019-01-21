@@ -1,20 +1,20 @@
 //
-//  ListedShowsViewController.swift
+//  SubscribedShowsViewController.swift
 //  Series
 //
-//  Created by Francisco Depascuali on 17/01/2019.
+//  Created by Francisco Depascuali on 21/01/2019.
 //  Copyright © 2019 depa. All rights reserved.
 //
 
 import UIKit
 
-final class ListedShowsViewController: UIViewController {
+class SubscribedShowsViewController: UIViewController {
 
-    fileprivate let _view = ListedShowsView()
+    fileprivate let _view = SubscribedShowsView()
 
-    fileprivate let _viewModel: ListedShowsViewModel
+    fileprivate let _viewModel: SubscribedShowsViewModel
 
-    init(viewModel: ListedShowsViewModel) {
+    init(viewModel: SubscribedShowsViewModel) {
         _viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -22,7 +22,7 @@ final class ListedShowsViewController: UIViewController {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     override func loadView() {
         view = UIView()
         view.backgroundColor = UIColor(hexString: "#1b1b1b")
@@ -32,9 +32,9 @@ final class ListedShowsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        _view.allShows.dataSource = self
-        _view.allShows.delegate = self
-        _view.allShows.register(ShowPreviewCell.self, forCellWithReuseIdentifier: "ShowPreviewCell")
+        _view.subscribedShowsCollectionView.dataSource = self
+        _view.subscribedShowsCollectionView.delegate = self
+        _view.subscribedShowsCollectionView.registerIdentifier(.subscribedShowCell)
         navigationController?.navigationBar.isHidden = true
 
         bindViewModel()
@@ -42,23 +42,23 @@ final class ListedShowsViewController: UIViewController {
 }
 
 //TODO: white scrolling indicator 
-extension ListedShowsViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension SubscribedShowsViewController: UICollectionViewDataSource, UICollectionViewDelegate {
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return _viewModel.numberOfShows()
+        return _viewModel.numberOfSubscribedShows()
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let showPreviewCell = _view.allShows.dequeueReusableCell(withReuseIdentifier: "ShowPreviewCell", for: indexPath) as! ShowPreviewCell
+        let subscribedShowcell: SubscribedShowPreviewCell = _view.subscribedShowsCollectionView.dequeueReusableCell(withIdentifier: .subscribedShowCell, indexPath: indexPath)
 
-        let showPreviewCellViewModel = _viewModel.createShowPreviewCellViewModel(forIndex: indexPath.row)
+        let subscribedShowCellViewModel = _viewModel.createSubscribedCellViewModel(forIndex: indexPath.row)
 
-        showPreviewCell.bindViewModel(viewModel: showPreviewCellViewModel)
-        return showPreviewCell
+        subscribedShowcell.bindViewModel(viewModel: subscribedShowCellViewModel)
+        return subscribedShowcell
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -66,14 +66,14 @@ extension ListedShowsViewController: UICollectionViewDataSource, UICollectionVie
     }
 }
 
-fileprivate extension ListedShowsViewController {
+fileprivate extension SubscribedShowsViewController {
 
     fileprivate func bindViewModel() {
         _viewModel
-            .fetchShows()
+            .fetchSubscribedShows
             .producer
             .startWithValues { [unowned self] _ in
-                self._view.allShows.reloadData()
+                self._view.subscribedShowsCollectionView.reloadData()
         }
 
     }

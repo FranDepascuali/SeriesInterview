@@ -17,8 +17,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         window = UIWindow(frame: UIScreen.main.bounds)
-        let nav = UINavigationController(rootViewController: ListedShowsViewController(viewModel: ListedShowsViewModel(showsRepository: ShowsRepository(), userRepository: UserRepository())))
-        window!.rootViewController = nav
+//        let nav = UINavigationController(rootViewController: ListedShowsViewController(viewModel: ListedShowsViewModel(showsRepository: ShowsRepository(), userRepository: UserRepository())))
+//        window!.rootViewController = nav
+
+
+        let mainViewModel = MainViewModel(userRepository: UserRepository(), showsRepository: ShowsRepository())
+        window!.rootViewController = UINavigationController(rootViewController: MainViewController(viewModel: mainViewModel))
 
         UINavigationBar.appearance().barStyle = .black
         window!.makeKeyAndVisible()

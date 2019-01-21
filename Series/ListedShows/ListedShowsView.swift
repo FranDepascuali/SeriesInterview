@@ -15,8 +15,6 @@ class ListedShowsView: UIView {
     // how we display the elements, a collectionView will adapt better
     let allShows = createAllShowsCollection()
 
-    let allLabel: UILabel = createAllLabel()
-
     init() {
         super.init(frame: .zero)
         addSubviews()
@@ -31,33 +29,13 @@ class ListedShowsView: UIView {
 fileprivate extension ListedShowsView {
 
     fileprivate func addSubviews() {
-        addSubview(allLabel)
         addSubview(allShows)
     }
 
     fileprivate func setConstraints() {
-        allLabel.autoPinEdge(toSuperviewSafeArea: .top, withInset: 20)
-        allLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 15)
-
-        allShows.autoPinEdge(.top, to: .bottom, of: allLabel, withOffset: 20)
-        allShows.autoPinEdge(toSuperviewEdge: .left, withInset: 15)
-        allShows.autoPinEdge(toSuperviewEdge: .right, withInset: 15)
-        allShows.autoPinEdge(toSuperviewEdge: .bottom, withInset: 15)
+        allShows.autoPinEdgesToSuperviewEdges()
     }
 
-}
-
-
-fileprivate func createAllLabel() -> UILabel {
-    let allLabel = UILabel()
-
-    allLabel.textColor = .white
-    allLabel.alpha = 0.44
-    // TODO: Localize this
-    allLabel.text = "ALL"
-    allLabel.font = .systemFont(ofSize: 12, weight: UIFont.Weight.medium)
-
-    return allLabel
 }
 
 fileprivate func createAllShowsCollection() -> UICollectionView {
