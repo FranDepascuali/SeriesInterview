@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B13228E21F68AA2005EEC81 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B13228D21F68AA2005EEC81 /* DateFormatter.swift */; };
 		0B9E94CF21F1508A004A0707 /* AllShowsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9E94CE21F1508A004A0707 /* AllShowsViewController.swift */; };
 		0B9E94D121F15093004A0707 /* AllShowsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9E94D021F15093004A0707 /* AllShowsViewModel.swift */; };
 		0B9E94D521F150D1004A0707 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9E94D421F150D1004A0707 /* UIColor.swift */; };
@@ -59,6 +60,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0B13228D21F68AA2005EEC81 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		0B9E94CE21F1508A004A0707 /* AllShowsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllShowsViewController.swift; sourceTree = "<group>"; };
 		0B9E94D021F15093004A0707 /* AllShowsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllShowsViewModel.swift; sourceTree = "<group>"; };
 		0B9E94D421F150D1004A0707 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				0B9E94DE21F15D65004A0707 /* SignalProducer.swift */,
+				0B13228D21F68AA2005EEC81 /* DateFormatter.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -577,6 +580,7 @@
 				0B9E94DF21F15D65004A0707 /* SignalProducer.swift in Sources */,
 				0B9E94E321F4BBCF004A0707 /* NetworkRepository.swift in Sources */,
 				0BBDAA1521EEBCB600C4F3CF /* ViewController.swift in Sources */,
+				0B13228E21F68AA2005EEC81 /* DateFormatter.swift in Sources */,
 				0B9E950321F66C52004A0707 /* MainViewModel.swift in Sources */,
 				0B9E94F921F664EA004A0707 /* UICollectionView.swift in Sources */,
 				0B9E94CF21F1508A004A0707 /* AllShowsViewController.swift in Sources */,
