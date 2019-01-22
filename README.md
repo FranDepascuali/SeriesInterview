@@ -1,6 +1,10 @@
 # Series Interview
 Exercise to show my coding skills
 
+## Screencast
+![series](https://user-images.githubusercontent.com/12101394/51504225-97d7ba00-1dbe-11e9-9882-ffe008367cb4.gif)
+
+
 ## Implemented
 1. List of series
 2. Detailed view
@@ -15,9 +19,6 @@ Exercise to show my coding skills
 5. Errors are not handled
 6. Degrade in shows list is missing
 7. URL was fixed, but it should be retrieved from the API.
-
-## Screencast
-![series](https://user-images.githubusercontent.com/12101394/51504225-97d7ba00-1dbe-11e9-9882-ffe008367cb4.gif)
 
 ## Bootstrap
 * Clone this repo.
