@@ -8,6 +8,8 @@
 
 import ReactiveSwift
 
+import enum Result.NoError
+import struct Result.AnyError
 
 final class SubscribedShowsViewModel {
 

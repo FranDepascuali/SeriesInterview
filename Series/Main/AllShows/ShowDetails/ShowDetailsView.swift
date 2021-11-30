@@ -58,7 +58,7 @@ class ShowDetailsView: UIView {
 
 fileprivate extension ShowDetailsView {
 
-    fileprivate func addSubviews() {
+    func addSubviews() {
         addSubview(containerScrollView)
         addSubview(opacityView)
         addSubview(backgroundImageView)

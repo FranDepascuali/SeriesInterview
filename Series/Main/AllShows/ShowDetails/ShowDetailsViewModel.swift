@@ -8,6 +8,9 @@
 
 import ReactiveSwift
 
+import enum Result.NoError
+import struct Result.AnyError
+
 final class ShowDetailsViewModel {
 
     fileprivate let _show: Show
@@ -43,14 +46,14 @@ final class ShowDetailsViewModel {
         if subscribed.value {
             _userRepository
                 .unsubscribe(from: _show)
-                .on(value: { [unowned self] _ in
+                .on(value: { [unowned self] (_: ()) in
                     self._subscribed.value = false
                 })
                 .start()
         } else {
             _userRepository
                 .subscribe(to: _show)
-                .on(value: { [unowned self] _ in
+                .on(value: { [unowned self] (_: ()) in
                     self._subscribed.value = true
                 })
                 .start()

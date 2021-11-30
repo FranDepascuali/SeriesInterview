@@ -11,6 +11,9 @@ import ReactiveSwift
 import SwiftyJSON
 import Alamofire
 
+import enum Result.NoError
+import struct Result.AnyError
+
 struct Routes {
 
     fileprivate let baseURL: NSURL

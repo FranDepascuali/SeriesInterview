@@ -8,6 +8,9 @@
 
 import ReactiveSwift
 
+import enum Result.NoError
+import struct Result.AnyError
+
 class AllShowsViewModel {
 
     fileprivate let _showsRepository: ShowsRepositoryType

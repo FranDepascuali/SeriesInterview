@@ -11,8 +11,8 @@ import ReactiveSwift
 import enum Result.NoError
 import struct Result.AnyError
 
-typealias NoError = Result.NoError
-typealias AnyError = Result.AnyError
+//typealias NoError = Result.NoError
+//typealias AnyError = Result.AnyError
 
 typealias ReadOnlyProperty = ReactiveSwift.Property
 

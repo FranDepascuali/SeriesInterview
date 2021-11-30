@@ -8,6 +8,9 @@
 
 import ReactiveSwift
 
+import enum Result.NoError
+import struct Result.AnyError
+
 protocol UserRepositoryType {
 
     var currentUser: ReadOnlyProperty<User> { get }

@@ -9,6 +9,9 @@
 import Foundation
 import ReactiveSwift
 
+import enum Result.NoError
+import struct Result.AnyError
+
 protocol ShowsRepositoryType {
 
     // TODO: Change this (errors)

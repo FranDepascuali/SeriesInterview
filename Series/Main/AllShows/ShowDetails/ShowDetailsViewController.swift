@@ -56,13 +56,13 @@ fileprivate extension ShowDetailsViewController {
 
         if let posterImage = _viewModel.posterImage.value {
             let imageColors = posterImage.getColors()
-            self._view.opacityView.backgroundColor = imageColors.primary
+            self._view.opacityView.backgroundColor = imageColors!.primary
             _view.showImageView.sd_setImage(with: URL(string: _viewModel.posterURL))
         } else {
             _view.showImageView.sd_setImage(with: URL(string: _viewModel.posterURL), completed: { [unowned self] image, error, cacheType, imageURL in
                 // TODO: avoid dereferencing
                 let imageColors = image!.getColors()
-                self._view.opacityView.backgroundColor = imageColors.primary
+                self._view.opacityView.backgroundColor = imageColors!.primary
             })
         }
 
